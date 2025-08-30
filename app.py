@@ -1,9 +1,12 @@
 from flask import Flask
+import os
+from dotenv import load_dotenv
 from routers.v1 import blueprints as v1_blueprints
 from routers.v1 import prefix as v1_prefix
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
+load_dotenv()
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL', 'sqlite:///database.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # Initialize the database

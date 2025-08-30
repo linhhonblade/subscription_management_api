@@ -21,3 +21,14 @@ def app():
 @pytest.fixture
 def client(app):
     return app.test_client()
+
+
+@pytest.fixture
+def registered_user(client):
+    payload = {
+        "name": "Mailovemisa",
+        "email": "mailovemsia@example.com",
+        "password": "123"
+    }
+    client.post('/api/v1/auth/register', json=payload)
+    return payload
